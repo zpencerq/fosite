@@ -173,6 +173,8 @@ func (f *Fosite) WriteIntrospectionError(rw http.ResponseWriter, err error) {
 //	   "active": false
 //	 }
 func (f *Fosite) WriteIntrospectionResponse(rw http.ResponseWriter, r IntrospectionResponder) {
+	rw.Header().Set("Content-Type", "application/json;charset=UTF-8")
+
 	if !r.IsActive() {
 		_ = json.NewEncoder(rw).Encode(&struct {
 			Active bool `json:"active"`
